@@ -1,0 +1,7 @@
+{
+  "name": "Wataburguer - Menú Digital Premium",
+  "description": "Menú digital de lujo para Wataburguer en Paraguay. Incluye panel de administración con carga de fotos locales y pedidos por WhatsApp.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
