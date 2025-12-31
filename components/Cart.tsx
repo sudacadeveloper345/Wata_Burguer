@@ -31,21 +31,25 @@ const Cart: React.FC<CartProps> = ({ isOpen, onClose, items, setItems }) => {
     const orderID = `WATA-${Math.floor(1000 + Math.random() * 9000)}`;
     const date = new Date().toLocaleDateString('es-PY');
     
-    let message = `*🔥 NUEVA ORDEN WATABURGUER 🔥*%0A`;
-    message += `*Orden:* #${orderID}%0A`;
-    message += `*Fecha:* ${date}%0A`;
-    message += `------------------------------------------%0A%0A`;
+    // Construimos el texto con saltos de línea reales \n
+    let messageText = `*🔥 NUEVA ORDEN WATABURGUER 🔥*\n`;
+    messageText += `*Orden:* #${orderID}\n`;
+    messageText += `*Fecha:* ${date}\n`;
+    messageText += `------------------------------------------\n\n`;
     
     items.forEach(item => {
-      message += `🛒 *${item.quantity}x ${item.product.name}*%0A`;
-      message += `   _Precio: ${formatPrice(item.product.price * item.quantity)}_%0A%0A`;
+      messageText += `🛒 *${item.quantity}x ${item.product.name}*\n`;
+      messageText += `   _Subtotal: ${formatPrice(item.product.price * item.quantity)}_\n\n`;
     });
     
-    message += `------------------------------------------%0A`;
-    message += `💰 *TOTAL A PAGAR: ${formatPrice(total)}*%0A%0A`;
-    message += `✅ _Confirmar pedido para Wataburguer. ¿Tiempo de entrega estimado?_`;
+    messageText += `------------------------------------------\n`;
+    messageText += `💰 *TOTAL A PAGAR: ${formatPrice(total)}*\n\n`;
+    messageText += `✅ _Confirmar pedido para Wataburguer. ¿Tiempo de entrega estimado?_`;
     
-    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+    // Codificamos TODA la cadena para que sea segura en una URL
+    const encodedMessage = encodeURIComponent(messageText);
+    const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+    
     window.open(whatsappUrl, '_blank');
   };
 
