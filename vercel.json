@@ -4,6 +4,7 @@
   "github": {
     "silent": true
   },
+  "outputDirectory": "dist",
   "headers": [
     {
       "source": "/(.*)",
